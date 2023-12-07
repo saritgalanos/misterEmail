@@ -2,7 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 
 export function AppHeader() {
     return (
-        <header className="app-header">
+        <header className="app-header title">
             <section className="container">
                 <nav>
                     <NavLink to="/">Home</NavLink>
