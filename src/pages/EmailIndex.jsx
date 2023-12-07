@@ -13,10 +13,10 @@ export function EmailIndex() {
     //     loadRobots()
     // }, [filterBy])
 
-    // async function loadRobots() {
-    //     const robots = await robotService.query(filterBy)
-    //     setRobots(robots)
-    // }
+    async function loadEmails() {
+         const robots = await robotService.query(filterBy)
+         setEmails(robots)
+     }
 
 
     useEffect(() => {
@@ -25,6 +25,7 @@ export function EmailIndex() {
 
     async function loadEmails() {
         const emails = await emailService.query()
+        console.log(emails)
         setEmails(emails)
     }
 

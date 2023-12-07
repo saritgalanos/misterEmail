@@ -5,37 +5,35 @@ import { Link } from "react-router-dom"
 
 export function EmailDetails() {
     const [email, setEmail] = useState(null)
-    // const params = useParams()
-    // const navigate = useNavigate()
+    const params = useParams()
+   // const navigate = useNavigate()
+   console.log('params:'+params)
 
-    // useEffect(() => {
-    //     loadRobot()
-    // }, [params.robotId])
+    useEffect(() => {
+        loadEmail()
+    }, [params.emailId])
 
-    // async function loadRobot() {
-    //     try {
-    //         const robot = await robotService.getById(params.robotId)
-    //         setRobot(robot)
-    //     } catch (error) {
-    //         console.log('error:', error)
-    //     }
-    // }
+    async function loadEmail() {
+        try {
+            console.log ("loading by id:" + params.emailId)
+            const email = await emailService.getById(params.emailId)
+            setEmail(email)
+        } catch (error) {
+            console.log('error:', error)
+        }
+    }
 
-    // function onBack() {
-    //     navigate('/robot')
-    // }
-    // console.log('Render');
-    
-    if (!email) return <div>Loading...</div>
+        
+
+    if (!email) return <div>Loading Email Deatils...</div>
+   
     return (
         <section className="email-details">
             <h1>Email Details</h1>
-            {/* <img src={`https://robohash.org/${robot.id}`} alt="" />
-            <h3>Type: {robot.type}</h3>
-            <h3>Model: {robot.model}</h3>
-            <h3>Battery: {robot.batteryStatus}</h3>
-            <Link to={`/robot/r3`} >Next Robot</Link>
-            <button onClick={onBack}>Back</button> */}
+            <h3>from: {email.from}</h3>
+            <h3>to: {email.to}</h3>
+            <h3>subject: {email.subject}</h3>
+            <h3>{email.body}</h3>
         </section>
     )
 }
