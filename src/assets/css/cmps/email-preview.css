@@ -1,0 +1,33 @@
+.email-preview {
+    font-size: 1em;
+    background: #faf8f9;
+    color: rgb(68, 67, 67);
+    border-bottom: 1px solid #ddd;
+    padding: 7px;
+    display: flex;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s
+}
+
+.email-preview .subject {
+    margin-right: 10px;
+}
+
+
+.email-preview .from {
+    margin-right: 10px;
+    min-width: 150px;
+    font-weight: bold;
+}
+
+
+.email-preview .from .read {
+    font-weight: normal;
+}
+
+
+
+.email-preview:hover {
+    background-color: #ece6e6;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
