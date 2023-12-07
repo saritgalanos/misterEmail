@@ -61,12 +61,12 @@ function save(emailToSave) {
     }
 }
 
-function createEmail(subject = '', body = '', isRead = false, isStarred = false, sentAt = 0, removedAt = null,from=null, to=null) {
+function createEmail(subject = '', body = '', sentAt = 0, removedAt = null,from="", to="") {
     return {
         subject,
         body,
-        isRead,
-        isStarred,
+        isRead: false,
+        isStarred: false,
         sentAt,
         removedAt,
         from,
