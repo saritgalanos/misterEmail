@@ -8,12 +8,11 @@ export function EmailList({ emails, onRemoveEmail, onStar }) {
 
 
         <ul className="email-list">
-             {emails.map(email =>
-                <li key={email.id}>
-                    <EmailPreview email={email} onStar={onStar}/>
-                    {/* <div className="robot-actions">
-                        <button onClick={() => onRemoveRobot(robot.id)}>X</button>
-                    </div> */}
+            {emails.map(email =>
+                <li  key={email.id}>
+                   
+                    <EmailPreview email={email} onStar={onStar} />
+                    
                 </li>
             )}
         </ul>

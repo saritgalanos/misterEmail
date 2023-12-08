@@ -3,7 +3,9 @@ export const utilService = {
     makeId,
     saveToStorage,
     loadFromStorage,
-    getImgUrl
+    getImgUrl,
+    getMonthName,
+    getDateToDisplay
 }
 
 function makeId(length = 5) {
@@ -26,4 +28,32 @@ function loadFromStorage(key, defaultValue = null) {
 
 function getImgUrl(url) {
     return new URL(url, import.meta.url).href
+}
+
+
+function getMonthName(date) {
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+    ]
+    return monthNames[date.getMonth()]
+}
+
+function getDateToDisplay(date) {
+
+    const minutes = date.getMinutes();
+    const hours = date.getHours()
+    return `${hours}:${minutes}`
+    // const timestampDate = new Date(timestampInMilliseconds);
+    
+
+    // const isToday = (
+    //     date.getFullYear() === timestampDate.getFullYear() &&
+    //     date.getMonth() === timestampDate.getMonth() &&
+    //     date.getDate() === timestampDate.getDate()
+    //   )
+    //   return `${date.}`
+
+    //today - get houre
+    //this year but not today - get month and day
+    //before this year - get year
 }

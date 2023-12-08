@@ -28,12 +28,12 @@ export function EmailDetails() {
     if (!email) return <div>Loading Email Deatils...</div>
    
     return (
-        <section className="email-details">
-            <h1>Email Details</h1>
-            <h3>from: {email.from}</h3>
-            <h3>to: {email.to}</h3>
-            <h3>subject: {email.subject}</h3>
-            <h3>{email.body}</h3>
-        </section>
+        <div className="email-details">
+            <div className="email-subject"> {email.subject}</div>
+            <div>from: {email.from}</div>
+            <div>to: {email.to}</div>
+            
+            <div>{email.body}</div>
+        </div>
     )
 }
