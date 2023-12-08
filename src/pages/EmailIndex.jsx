@@ -14,9 +14,9 @@ export function EmailIndex() {
     // }, [filterBy])
 
     async function loadEmails() {
-         const robots = await robotService.query(filterBy)
-         setEmails(robots)
-     }
+        const robots = await robotService.query(filterBy)
+        setEmails(robots)
+    }
 
 
     useEffect(() => {
@@ -45,11 +45,22 @@ export function EmailIndex() {
     //     setFilterBy(prevFilter => ({ ...prevFilter, ...filterBy }))
     // }
 
+    async function onStar(emailId) {
+        try {
+            const email = await emailService.getById(emailId)
+            email.isStarred = !email.isStarred
+            emailService.save(email)
+
+        } catch (error) {
+            console.log('error:', error)
+        }
+    }
+
     if (!emails) return <div>Loading...</div>
 
     return (
         <section className="email-index">
-            <EmailList emails={emails} onRemoveEmail={() => { return } /*onRemoveRobot*/} />
+            <EmailList emails={emails} onRemoveEmail={() => { return } /*onRemoveRobot*/} onStar={onStar} />
         </section>
     )
 

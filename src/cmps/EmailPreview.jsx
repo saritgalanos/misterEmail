@@ -1,32 +1,34 @@
 import { Link } from "react-router-dom";
+import { Component, useEffect, useState } from "react"
+import { emailService } from "../services/email.service";
+import { utilService } from "../services/util.service";
 
-export function EmailPreview({ email }) {
+export function EmailPreview({ email , onStar }) {
 
-    function getImgUrl(url) {
-        return new URL(url, import.meta.url).href
+    const [isStar, setIsStar] = useState(email.isStarred)
+    
+    function OnstarPreview()
+    {
+        setIsStar(!isStar)
+        onStar(email.id)
     }
 
-    function onStarred() {
-        console.log(email.isStarred)
-        email.isStarred = !email.isStarred
-        console.log(email.isStarred)
+    function getStarIconUrl() {
+        const starIcon = isStar ? "yellowstar" : "star"
+        return utilService.getImgUrl(`../assets/imgs/${starIcon}.png`)
     }
-
+    
     return (
 
-        <article className="email-preview">
+        <div className="email-preview">
 
-            <img className="icon" onClick={onStarred} src={getImgUrl("../assets/imgs/nostarred.png")} />
-            <Link to={`/email/${email.id}`}>
+            <img className="icon" onClick={() => OnstarPreview()} src={getStarIconUrl()} />
+            <Link className="email-line" to={`/email/${email.id}`}>
                 <div className="from">{email.from}</div>
                 <div className="subject"> {email.subject} </div>
                 <div> {email.body} </div>
             </Link>
-            {/* <Link to={`/robot/${robot.id}`}>
-                <img src={`https://robohash.org/${robot.id}`} alt="" />
-                <h2>{robot.model}</h2>
-                <h4>{robot.type}</h4>
-            </Link> */}
-        </article>
+           
+        </div>
     )
 }

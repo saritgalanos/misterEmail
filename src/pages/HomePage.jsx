@@ -3,7 +3,7 @@
 export function HomePage() {
     return (
         <section className="home">
-            <h1>Welcome to our Email App</h1>
+            <h1>MisterEmail App</h1>
             {/* <img src={imgUrl} alt="" /> */}
         </section>
     )
