@@ -22,16 +22,16 @@
 .email-preview .from,
 .email-preview .sent-at {
     margin-right: 10px;
-    font-weight: bold;
+    /* font-weight: bold; */
+}
+.email-not-read {
+    font-weight:bold;
+    
 }
 
 .email-preview .from {
     min-width: 150px; /* Set a minimum width for the "From" field */
     max-width: 200px; /* Set a maximum width for the "From" field */
-}
-
-.email-preview .subject {
-    margin-right: 10px;
 }
 
 .email-body {

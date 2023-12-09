@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { utilService } from "../services/util.service"
 
-export function EmailFilter({ filterBy, onSetFilter }) {
+export function SidePanelFilter({ filterBy, onSetFilter }) {
     const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
 
     function handleChange(ev) {
@@ -30,17 +30,16 @@ export function EmailFilter({ filterBy, onSetFilter }) {
 
     return (
 
-        <section className="email-filter">
+        <section className="side-panel-filter">
             <div className="image-with-text">Inbox</div>
             <div className="image-with-text"><img className="icon" onClick={() => OnStarFilter()} src={utilService.getStarIconUrl(false)} /> <p>Starred</p> </div>
             <div className="image-with-text">Sent</div>
             <div className="image-with-text">Draft</div>
-            <div className="image-with-text">Trash</div>
-            <div className="image-with-text"><img className="icon" onClick={() => OnStarFilter()} src={utilService.getTrashIconUrl(false)} /> <p>Trush</p> </div>
+            <div className="image-with-text"><img className="icon" onClick={() => OnStarFilter()} src={utilService.getTrashIconUrl(false)} /> <p>Trash</p> </div>
         </section>
 
-        // <form className="email-filter">
-        //     <h1>EmailFilter</h1>
+        // <form className="side-panel-filter">
+        //     <h1>SidePanelFilter</h1>
         //     <label htmlFor="model">Model</label>
         //     <input onChange={handleChange} id="model" value={model} name="model" type="text" />
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { emailService } from "../services/email.service"
 import { EmailList } from "../cmps/EmailList"
-import { EmailFilter } from "../cmps/EmailFilter"
+import { SidePanelFilter } from "../cmps/SidePanelFilter"
 
 
 
@@ -30,16 +30,16 @@ export function EmailIndex() {
     }
 
 
-    // async function onRemoveRobot(robotId) {
-    //     try {
-    //         await robotService.remove(robotId)
-    //         setRobots(prevRobots => {
-    //             return prevRobots.filter(robot => robot.id !== robotId)
-    //         })
-    //     } catch (error) {
-    //         console.log('error:', error)
-    //     }
-    // }
+    async function onRemoveEmail(emailId) {
+        try {
+            await emailService.remove(emailId)
+            setEmails(prevEmails => {
+                return prevEmails.filter(email => email.id !== emailId)
+            })
+        } catch (error) {
+            console.log('error:', error)
+        }
+    }
 
     function onSetFilter(filterBy) {
          setFilterBy(prevFilter => ({ ...prevFilter, ...filterBy }))
@@ -60,8 +60,8 @@ export function EmailIndex() {
 
     return (
         <section className="email-index">
-            <EmailFilter filterBy={ {emailStatus, txt, isRead }} onSetFilter={onSetFilter} />
-            <EmailList emails={emails} onRemoveEmail={() => { return } /*onRemoveRobot*/} onStar={onStar} />
+            <SidePanelFilter filterBy={ {emailStatus, txt, isRead }} onSetFilter={onSetFilter} />
+            <EmailList emails={emails} onRemoveEmail={onRemoveEmail} onStar={onStar} />
         </section>
     )
 

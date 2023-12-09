@@ -11,7 +11,7 @@ export function EmailList({ emails, onRemoveEmail, onStar }) {
             {emails.map(email =>
                 <li  key={email.id}>
                    
-                    <EmailPreview email={email} onStar={onStar} />
+                    <EmailPreview email={email} onStar={onStar} onRemoveEmail={onRemoveEmail}/>
                     
                 </li>
             )}

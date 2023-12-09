@@ -13,17 +13,33 @@ export function EmailDetails() {
         loadEmail()
     }, [params.emailId])
 
+    useEffect(() => {
+        setIsRead()
+    }, [email])
+
+
+
+
     async function loadEmail() {
         try {
-            console.log ("loading by id:" + params.emailId)
             const email = await emailService.getById(params.emailId)
             setEmail(email)
         } catch (error) {
             console.log('error:', error)
         }
     }
-
-        
+    async function setIsRead() {
+        if(!email) {
+            console.log('set read called with no email available')
+            return;
+        }
+        try {
+            email.isRead = true;
+            await emailService.save(email)
+        } catch (error) {
+            console.log('error:', error)
+        }
+    }
 
     if (!email) return <div>Loading Email Deatils...</div>
    
