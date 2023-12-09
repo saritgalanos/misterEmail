@@ -1,0 +1,7 @@
+.email-list {
+    display: flex;
+    flex-direction: column;
+    padding-left: 1px;
+    width: 500px;
+    flex-grow: 1;
+}

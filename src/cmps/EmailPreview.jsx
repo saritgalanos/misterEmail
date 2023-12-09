@@ -12,26 +12,18 @@ export function EmailPreview({ email, onStar }) {
         onStar(email.id)
     }
 
-    function getStarIconUrl() {
-        const starIcon = isStar ? "yellowstar" : "star"
-        return utilService.getImgUrl(`../assets/imgs/${starIcon}.png`)
-    }
-
-
-   
-
-    return (
+      return (
 
         <div className="email-preview">
             <label>
                 <input type="checkbox" value="selected" checked={false} onChange={() => { }} />
             </label>
-            <img className="icon" onClick={() => OnstarPreview()} src={getStarIconUrl()} />
+            <img className="icon" onClick={() => OnstarPreview()} src={utilService.getStarIconUrl(isStar)} />
             <Link className="email-line" to={`/email/${email.id}`}>
                 <div className="from">{email.from}</div>
                 <div className="subject"> {email.subject} </div>
-                <div> {email.body} </div>
-                <div>{utilService.getDateToDisplay(new Date(email.sentAt))}</div>
+                <div className="email-body"> {email.body} </div>
+                <div className="sent-at">{utilService.getDateToDisplay(new Date(email.sentAt))}</div>
             </Link>
 
 

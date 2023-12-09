@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { utilService } from "../services/util.service"
 
 export function EmailFilter({ filterBy, onSetFilter }) {
     const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
@@ -22,10 +23,20 @@ export function EmailFilter({ filterBy, onSetFilter }) {
     // }
 
     // const { model, minBatteryStatus } = filterByToEdit
+
+    function OnStarFilter() {
+
+    }
+
     return (
 
         <section className="email-filter">
-            <h1>Email Filter</h1>
+            <div className="image-with-text">Inbox</div>
+            <div className="image-with-text"><img className="icon" onClick={() => OnStarFilter()} src={utilService.getStarIconUrl(false)} /> <p>Starred</p> </div>
+            <div className="image-with-text">Sent</div>
+            <div className="image-with-text">Draft</div>
+            <div className="image-with-text">Trash</div>
+            <div className="image-with-text"><img className="icon" onClick={() => OnStarFilter()} src={utilService.getTrashIconUrl(false)} /> <p>Trush</p> </div>
         </section>
 
         // <form className="email-filter">

@@ -7,6 +7,7 @@ export const emailService = {
     remove,
     getById,
     createEmail,
+    getDefaultFilter
 }
 
 const email = {
@@ -74,16 +75,39 @@ function createEmail(subject = '', body = '', sentAt = 0, removedAt = null,from=
     }
 }
 
+function getDefaultFilter() {
+    return {
+        emaiStatus: '',
+        txt: '',
+        isRead: ''
+    }
+}
+
+
 
 function _createEmails() {
     let emails = utilService.loadFromStorage(STORAGE_KEY)
+    
     if (!emails || !emails.length) {
-        emails = [
+
+        const emailBodylong = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`
+
+         emails = [
             {
-                id: 'e101', subject: 'Plans for tomorrow', body: 'Would love to catch up sometimes',
+                id: 'e101', subject: 'Plans for tomorrow', body: emailBodylong,
                 isRead: false, isStarred: false, sentAt: 1551133930594, removedAt: null,
                 from: 'roni@gmail.com', to: 'saritgalanos@misteremail.com'
             },
+            
             {
                 id: 'e102', subject: 'My next vacation', body: 'I would like to take a vacation for Christmas ',
                 isRead: false, isStarred: false, sentAt: 1551133940594, removedAt: null,
@@ -93,7 +117,34 @@ function _createEmails() {
                 id: 'e103', subject: 'Your yearly bonus', body: 'It is time for your yearly bonus, please come to my office',
                 isRead: false, isStarred: false, sentAt: 1551133950594, removedAt: null,
                 from: 'dan@momo.com', to: 'saritgalanos@misteremail.com'
+            },
+            {
+                id: 'e104', subject: 'Plans for tomorrow', body: emailBodylong,
+                isRead: false, isStarred: false, sentAt: 1551133930594, removedAt: null,
+                from: 'roni@gmail.com', to: 'saritgalanos@misteremail.com'
+            },
+            {
+                id: 'e105', subject: 'Plans for tomorrow', body: emailBodylong,
+                isRead: false, isStarred: false, sentAt: 1551133930594, removedAt: null,
+                from: 'roni@gmail.com', to: 'saritgalanos@misteremail.com'
+            },
+            
+            {
+                id: 'e106', subject: 'My next vacation', body: 'I would like to take a vacation for Christmas ',
+                isRead: false, isStarred: false, sentAt: 1551133940594, removedAt: null,
+                from: 'shiri@momo.com', to: 'saritgalanos@misteremail.com'
+            },
+            {
+                id: 'e107', subject: 'Your yearly bonus', body: 'It is time for your yearly bonus, please come to my office',
+                isRead: false, isStarred: false, sentAt: 1551133950594, removedAt: null,
+                from: 'daniel@momo.com', to: 'saritgalanos@misteremail.com'
+            },
+            {
+                id: 'e108', subject: 'Plans for tomorrow', body: emailBodylong,
+                isRead: false, isStarred: false, sentAt: 1551133930594, removedAt: null,
+                from: 'roni@gmail.com', to: 'saritgalanos@misteremail.com'
             }
+
         ]
         console.log(emails)
         utilService.saveToStorage(STORAGE_KEY, emails)

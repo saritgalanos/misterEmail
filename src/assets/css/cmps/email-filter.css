@@ -1,0 +1,12 @@
+.email-filter {
+    margin:10px;
+    background: #faf8f9;
+    min-width: 100px;
+    align-items: center;
+}
+
+.image-with-text {
+    display: flex;
+    align-items: center; /* Align items vertically in the center */
+    margin:10px;
+  }

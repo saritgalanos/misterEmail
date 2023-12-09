@@ -30,8 +30,9 @@ export function EmailDetails() {
     return (
         <div className="email-details">
             <div className="email-subject"> {email.subject}</div>
-            <div>from: {email.from}</div>
+            <div><strong>from: {email.from}</strong></div>
             <div>to: {email.to}</div>
+            <br></br>
             
             <div>{email.body}</div>
         </div>

@@ -4,6 +4,8 @@ export const utilService = {
     saveToStorage,
     loadFromStorage,
     getImgUrl,
+    getStarIconUrl,
+    getTrashIconUrl,
     getMonthName,
     getDateToDisplay
 }
@@ -29,6 +31,17 @@ function loadFromStorage(key, defaultValue = null) {
 function getImgUrl(url) {
     return new URL(url, import.meta.url).href
 }
+
+function getStarIconUrl(isStar) {
+    const starIcon = isStar ? "yellowstar" : "star"
+    return utilService.getImgUrl(`../assets/imgs/${starIcon}.png`)
+}
+
+function getTrashIconUrl(isTrash) {
+    const trasjIcon = isTrash ? "trash" : "trash"
+    return utilService.getImgUrl(`../assets/imgs/${trasjIcon}.png`)
+}
+
 
 
 function getMonthName(date) {

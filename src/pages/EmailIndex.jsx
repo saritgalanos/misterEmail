@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react"
 import { emailService } from "../services/email.service"
 import { EmailList } from "../cmps/EmailList"
-//import { EmailFilter } from "../cmps/EmailFilter"
+import { EmailFilter } from "../cmps/EmailFilter"
 
 
 
 export function EmailIndex() {
     const [emails, setEmails] = useState(null)
-    //const [filterBy, setFilterBy] = useState(robotService.getDefaultFilter())
+    const [filterBy, setFilterBy] = useState(emailService.getDefaultFilter())
 
-    // useEffect(() => {
-    //     loadRobots()
-    // }, [filterBy])
+    useEffect(() => {
+        loadEmails()
+    }, [filterBy])
 
     async function loadEmails() {
         const robots = await robotService.query(filterBy)
@@ -41,9 +41,9 @@ export function EmailIndex() {
     //     }
     // }
 
-    // function onSetFilter(filterBy) {
-    //     setFilterBy(prevFilter => ({ ...prevFilter, ...filterBy }))
-    // }
+    function onSetFilter(filterBy) {
+         setFilterBy(prevFilter => ({ ...prevFilter, ...filterBy }))
+    }
 
     async function onStar(emailId) {
         try {
@@ -55,11 +55,12 @@ export function EmailIndex() {
             console.log('error:', error)
         }
     }
-
+    const { emailStatus, txt, isRead } = filterBy
     if (!emails) return <div>Loading...</div>
 
     return (
         <section className="email-index">
+            <EmailFilter filterBy={ {emailStatus, txt, isRead }} onSetFilter={onSetFilter} />
             <EmailList emails={emails} onRemoveEmail={() => { return } /*onRemoveRobot*/} onStar={onStar} />
         </section>
     )
