@@ -6,3 +6,7 @@
 .email-details .email-subject {
     font-size:2em;    
 }
+
+.main-content {
+    flex-grow: 1;
+}

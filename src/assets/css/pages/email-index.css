@@ -1,5 +1,13 @@
 .email-index {
     display: flex;
-    flex-direction: row;
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+side-content {
+    padding: 20px;
 
 }

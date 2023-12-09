@@ -1,18 +1,22 @@
 .email-preview {
+    display: flex;
+    flex:1;
+    flex-grow: 1;
     font-size: 1em;
     background: #faf8f9;
     color: rgb(68, 67, 67);
     border-bottom: 1px solid #ddd;
     padding: 7px;
-    display: flex;
     cursor: pointer;
     transition: background-color 0.3s, box-shadow 0.3s;
+    
 }
 
-.email-preview .email-line {
+.email-line {
     display: flex;
-    flex-grow: 1;
-    align-items: flex-start; /* Align items to the start */
+     flex-grow: 1;
+    align-items: flex-start;
+    /* Align items to the start */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -24,17 +28,21 @@
     margin-right: 10px;
     /* font-weight: bold; */
 }
+
 .email-not-read {
-    font-weight:bold;
-    
+    font-weight: bold;
+
 }
 
 .email-preview .from {
-    min-width: 150px; /* Set a minimum width for the "From" field */
-    max-width: 200px; /* Set a maximum width for the "From" field */
+    min-width: 150px;
+    /* Set a minimum width for the "From" field */
+    max-width: 200px;
+    /* Set a maximum width for the "From" field */
 }
 
-.email-body {
+.email-preview .email-body {
+    flex-shrink: 0;
     flex-grow: 2;
     min-width: 0;
     overflow: hidden;
@@ -42,8 +50,9 @@
     margin-right: 20px;
 }
 
-.sent-at {
-    margin-left: auto; /* Move the sent-at to the right */
+.email-preview .sent-at {
+    margin-left: auto;
+    /* Move the sent-at to the right */
 }
 
 .email-preview:hover {

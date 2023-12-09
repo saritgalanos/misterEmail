@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 import { emailService } from "../services/email.service"
 import { EmailList } from "../cmps/EmailList"
-import { SidePanelFilter } from "../cmps/SidePanelFilter"
+import { SidePanel } from "../cmps/SidePanel"
+import { EmailFilter } from "../cmps/EmailFilter"
 
 
 
@@ -13,20 +14,15 @@ export function EmailIndex() {
         loadEmails()
     }, [filterBy])
 
-    async function loadEmails() {
-        const robots = await robotService.query(filterBy)
-        setEmails(robots)
-    }
-
-
     useEffect(() => {
         loadEmails()
     }, [])
 
     async function loadEmails() {
-        const emails = await emailService.query()
-        console.log(emails)
+
+        const emails = await emailService.query(filterBy)
         setEmails(emails)
+
     }
 
 
@@ -42,7 +38,9 @@ export function EmailIndex() {
     }
 
     function onSetFilter(filterBy) {
-         setFilterBy(prevFilter => ({ ...prevFilter, ...filterBy }))
+        console.log('filer set')
+        setFilterBy(prevFilter => ({ ...prevFilter, ...filterBy }))
+        console.log(filterBy)
     }
 
     async function onStar(emailId) {
@@ -55,13 +53,18 @@ export function EmailIndex() {
             console.log('error:', error)
         }
     }
-    const { emailStatus, txt, isRead } = filterBy
+    const { txt, emailStatus, isRead } = filterBy
     if (!emails) return <div>Loading...</div>
 
     return (
         <section className="email-index">
-            <SidePanelFilter filterBy={ {emailStatus, txt, isRead }} onSetFilter={onSetFilter} />
-            <EmailList emails={emails} onRemoveEmail={onRemoveEmail} onStar={onStar} />
+            <div className="side-content">
+                <SidePanel />
+            </div>
+            <div className='main-content'>
+                <EmailFilter filterBy={{ txt, emailStatus, isRead }} onSetFilter={onSetFilter} />
+                <EmailList emails={emails} onRemoveEmail={onRemoveEmail} onStar={onStar} />
+            </div>
         </section>
     )
 

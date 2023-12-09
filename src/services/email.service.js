@@ -33,12 +33,14 @@ const STORAGE_KEY = 'emails'
 _createEmails()
 
 async function query(filterBy) {
-    const emails = await storageService.query(STORAGE_KEY)
+    let emails = await storageService.query(STORAGE_KEY)
     if (filterBy) {
-        // var { type, maxBatteryStatus, minBatteryStatus, model } = filterBy
+        console.log("query filer:"+filterBy)
+        var { txt,emailStatus, isRead } = filterBy
         // maxBatteryStatus = maxBatteryStatus || Infinity
         // minBatteryStatus = minBatteryStatus || 0
-        // robots = robots.filter(robot => robot.type.toLowerCase().includes(type.toLowerCase()) && robot.model.toLowerCase().includes(model.toLowerCase())
+        emails = emails.filter(email => email.body.toLowerCase().includes(txt.toLowerCase())
+        || email.subject.toLowerCase().includes(txt.toLowerCase()))
         //     && (robot.batteryStatus < maxBatteryStatus)
         //     && robot.batteryStatus > minBatteryStatus)
     }
@@ -103,7 +105,7 @@ function _createEmails() {
 
          emails = [
             {
-                id: 'e101', subject: 'Plans for tomorrow', body: emailBodylong,
+                id: 'e101', subject: 'Plans for tomorrow', body: 'emailBodylong',
                 isRead: false, isStarred: false, sentAt: 1551133930594, removedAt: null,
                 from: 'roni@gmail.com', to: 'saritgalanos@misteremail.com'
             },
@@ -119,12 +121,12 @@ function _createEmails() {
                 from: 'dan@momo.com', to: 'saritgalanos@misteremail.com'
             },
             {
-                id: 'e104', subject: 'Plans for tomorrow', body: emailBodylong,
+                id: 'e104', subject: 'Plans for tomorrow', body: 'emailBodylong',
                 isRead: false, isStarred: false, sentAt: 1551133930594, removedAt: null,
                 from: 'roni@gmail.com', to: 'saritgalanos@misteremail.com'
             },
             {
-                id: 'e105', subject: 'Plans for tomorrow', body: emailBodylong,
+                id: 'e105', subject: 'Plans for tomorrow', body: 'emailBodylong',
                 isRead: false, isStarred: false, sentAt: 1551133930594, removedAt: null,
                 from: 'roni@gmail.com', to: 'saritgalanos@misteremail.com'
             },
@@ -140,7 +142,7 @@ function _createEmails() {
                 from: 'daniel@momo.com', to: 'saritgalanos@misteremail.com'
             },
             {
-                id: 'e108', subject: 'Plans for tomorrow', body: emailBodylong,
+                id: 'e108', subject: 'Plans for tomorrow', body: 'emailBodylong',
                 isRead: false, isStarred: false, sentAt: 1551133930594, removedAt: null,
                 from: 'roni@gmail.com', to: 'saritgalanos@misteremail.com'
             }
