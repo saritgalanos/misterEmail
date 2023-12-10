@@ -7,8 +7,7 @@ export function EmailDetails() {
     const [email, setEmail] = useState(null)
     const params = useParams()
    // const navigate = useNavigate()
-   console.log('params:'+params)
-
+   
     useEffect(() => {
         loadEmail()
     }, [params.emailId])
@@ -30,7 +29,6 @@ export function EmailDetails() {
     }
     async function setIsRead() {
         if(!email) {
-            console.log('set read called with no email available')
             return;
         }
         try {

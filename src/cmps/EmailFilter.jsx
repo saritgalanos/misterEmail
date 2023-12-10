@@ -12,10 +12,8 @@ export function EmailFilter({ filterBy, onSetFilter }) {
 
 
     function handleChange(ev) {
-        console.log("EmailFilter: in handle change")
         let { name: field, value, type } = ev.target
         if (type === 'number') value = +value
-        console.log(`EmailFilter ${field}:${value}`)
         setFilterByToEdit(prevFilter => ({ ...prevFilter, [field]: value }))
     }
 
@@ -23,22 +21,8 @@ export function EmailFilter({ filterBy, onSetFilter }) {
         setSelectedOption(ev.target.value);
     }
 
-    // function handleModelChange(value) {
-    //     setFilterByToEdit(prevFilter => ({ ...prevFilter, model: value }))
-    // }
-
-    // function handleBatteryChange(value) {
-    //     setFilterByToEdit(prevFilter => ({ ...prevFilter, minBatteryStatus: value }))
-    // }
-
     let { isRead, txt } = filterByToEdit
-    //console.log('readStatus:'+readStatus)
-   // if (!readStatus) readStatus = 'All'
-
-
-    //const [selectedOption, setSelectedOption] = useState('All');
-
-
+ 
     return (
 
         <section className="email-filter">

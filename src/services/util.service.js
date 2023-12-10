@@ -4,8 +4,7 @@ export const utilService = {
     saveToStorage,
     loadFromStorage,
     getImgUrl,
-    getStarIconUrl,
-    getTrashIconUrl,
+    getIconUrl,
     getMonthName,
     getDateToDisplay
 }
@@ -32,17 +31,14 @@ function getImgUrl(url) {
     return new URL(url, import.meta.url).href
 }
 
-function getStarIconUrl(isStar) {
-    const starIcon = isStar ? "yellowstar" : "star"
-    return utilService.getImgUrl(`../assets/imgs/${starIcon}.png`)
+function getIconUrl(iconName, isSelected) {
+    if (isSelected) {
+        return utilService.getImgUrl(`../assets/imgs/selected_${iconName}.png`)
+    }
+    else {
+        return utilService.getImgUrl(`../assets/imgs/${iconName}.png`)
+    }
 }
-
-function getTrashIconUrl(isTrash) {
-    const trasjIcon = isTrash ? "trash" : "trash"
-    return utilService.getImgUrl(`../assets/imgs/${trasjIcon}.png`)
-}
-
-
 
 function getMonthName(date) {
     const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
@@ -55,18 +51,21 @@ function getDateToDisplay(date) {
 
     const minutes = date.getMinutes();
     const hours = date.getHours()
-    return `${hours}:${minutes}`
-    // const timestampDate = new Date(timestampInMilliseconds);
-    
+    const year = date.getFullYear()
+    const month = date.getMonth()
+    const dayOfMonth = date.getDate()
 
-    // const isToday = (
-    //     date.getFullYear() === timestampDate.getFullYear() &&
-    //     date.getMonth() === timestampDate.getMonth() &&
-    //     date.getDate() === timestampDate.getDate()
-    //   )
-    //   return `${date.}`
-
-    //today - get houre
-    //this year but not today - get month and day
-    //before this year - get year
+    const currentDate = new Date();
+    /*check if today*/
+    if ((dayOfMonth === currentDate.getDate() &&
+        month === currentDate.getMonth() &&
+        year === currentDate.getFullYear())) {
+        return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`
+    }
+    /*this year*/
+    if (year == currentDate.getFullYear()) {
+        return `${getMonthName(date)} ${dayOfMonth} `
+    }
+    /*not this year*/
+    return `${year}`
 }

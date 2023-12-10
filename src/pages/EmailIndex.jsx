@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { emailService } from "../services/email.service"
 import { EmailList } from "../cmps/EmailList"
-import { SidePanel } from "../cmps/SidePanel"
+import { EmailFolderList } from "../cmps/EmailFolderList"
 import { EmailFilter } from "../cmps/EmailFilter"
 
 
@@ -38,10 +38,8 @@ export function EmailIndex() {
     }
 
     function onSetFilter(filterBy) {
-        console.log('filer set')
-        setFilterBy(prevFilter => ({ ...prevFilter, ...filterBy }))
-        console.log(filterBy)
-    }
+         setFilterBy(prevFilter => ({ ...prevFilter, ...filterBy }))
+     }
 
     async function onStar(emailId) {
         try {
@@ -59,7 +57,7 @@ export function EmailIndex() {
     return (
         <section className="email-index">
             <div className="side-content">
-                <SidePanel />
+                <EmailFolderList />
             </div>
             <div className='main-content'>
                 <EmailFilter filterBy={{ txt, emailStatus, isRead }} onSetFilter={onSetFilter} />
