@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router"
 import { emailService } from "../services/email.service"
-import { Link } from "react-router-dom"
+import { utilService } from "../services/util.service"
+import { EmailFolderList } from "../cmps/EmailFolderList"
 
 export function EmailDetails() {
     const [email, setEmail] = useState(null)
     const params = useParams()
-   // const navigate = useNavigate()
-   
+    const navigate = useNavigate()
+
     useEffect(() => {
         loadEmail()
     }, [params.emailId])
@@ -16,7 +17,14 @@ export function EmailDetails() {
         setIsRead()
     }, [email])
 
-
+    async function onRemoveEmail(emailId) {
+        try {
+            await emailService.remove(emailId)
+            navigate('/emails')
+        } catch (error) {
+            console.log('error:', error)
+        }
+    }
 
 
     async function loadEmail() {
@@ -28,7 +36,7 @@ export function EmailDetails() {
         }
     }
     async function setIsRead() {
-        if(!email) {
+        if (!email) {
             return;
         }
         try {
@@ -40,15 +48,27 @@ export function EmailDetails() {
     }
 
     if (!email) return <div>Loading Email Deatils...</div>
-   
+
     return (
         <div className="email-details">
-            <div className="email-subject"> {email.subject}</div>
-            <div><strong>from: {email.from}</strong></div>
-            <div>to: {email.to}</div>
-            <br></br>
-            
-            <div>{email.body}</div>
+            <div className="side-content">
+                <EmailFolderList />
+            </div>
+            <div className="main-content">
+                <div className="email-date">{utilService.getDateToDisplay(new Date(email.sentAt), true)}</div>
+                <div className='image-with-text'>
+                    <img className="icon" onClick={() => { onRemoveEmail(email.id) }} src={utilService.getIconUrl('trash', false)} />
+                    <img className="icon" onClick={() => { }} src={utilService.getIconUrl('star', email.isStarred)} />
+                    <div className="email-subject"> {email.subject}</div>
+                </div>
+
+                <div><strong>from: {email.from}</strong></div>
+                <div>to: {email.to}</div>
+
+                <br></br>
+
+                <div>{email.body}</div>
+            </div>
         </div>
     )
 }

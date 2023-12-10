@@ -47,20 +47,25 @@ function getMonthName(date) {
     return monthNames[date.getMonth()]
 }
 
-function getDateToDisplay(date) {
+function getDateToDisplay(date, isFullDate=false) {
 
     const minutes = date.getMinutes();
     const hours = date.getHours()
     const year = date.getFullYear()
     const month = date.getMonth()
     const dayOfMonth = date.getDate()
+    const AmPM = hours<12? 'PM':'AM'
+    if(isFullDate) {
+        console.log("print date")
+        return `${getMonthName(date)} ${dayOfMonth}, ${year}, ${hours}:${minutes.toString().padStart(2, '0')} ${AmPM}`
+    }
 
     const currentDate = new Date();
     /*check if today*/
     if ((dayOfMonth === currentDate.getDate() &&
         month === currentDate.getMonth() &&
         year === currentDate.getFullYear())) {
-        return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`
+        return `${hours}:${minutes.toString().padStart(2, '0')}`
     }
     /*this year*/
     if (year == currentDate.getFullYear()) {

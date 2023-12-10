@@ -1,5 +1,6 @@
 .email-details {
     font-size: 1em;
+    display:flex;
       
 }
 
@@ -9,4 +10,8 @@
 
 .main-content {
     flex-grow: 1;
+}
+
+.email-date {
+    font-style:italic;
 }
