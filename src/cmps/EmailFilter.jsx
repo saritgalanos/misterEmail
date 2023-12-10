@@ -1,20 +1,21 @@
 import { useEffect, useState } from "react"
 import { utilService } from "../services/util.service"
+import Select from 'react-select'
 
 export function EmailFilter({ filterBy, onSetFilter }) {
     const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
 
-    
+
     useEffect(() => {
         onSetFilter(filterByToEdit)
     }, [filterByToEdit])
 
 
     function handleChange(ev) {
-        
+        console.log("EmailFilter: in handle change")
         let { name: field, value, type } = ev.target
         if (type === 'number') value = +value
-        console.log(`filter ${field}:${value}`)
+        console.log(`EmailFilter ${field}:${value}`)
         setFilterByToEdit(prevFilter => ({ ...prevFilter, [field]: value }))
     }
 
@@ -30,18 +31,19 @@ export function EmailFilter({ filterBy, onSetFilter }) {
     //     setFilterByToEdit(prevFilter => ({ ...prevFilter, minBatteryStatus: value }))
     // }
 
-    const {readStatus,txt} = filterByToEdit
+    let { isRead, txt } = filterByToEdit
+    //console.log('readStatus:'+readStatus)
+   // if (!readStatus) readStatus = 'All'
 
 
+    //const [selectedOption, setSelectedOption] = useState('All');
 
-   const [selectedOption, setSelectedOption] = useState('All');
-   
 
     return (
 
         <section className="email-filter">
             <label htmlFor="dropdown"></label>
-            <select id="dropdown" value={selectedOption} onChange={handleSelectChange}>
+            <select id="dropdown" value={isRead} onChange={handleChange} name='isRead'>
                 <option value="All">All</option>
                 <option value="Read">Read</option>
                 <option value="Unread">Unread</option>
@@ -49,7 +51,7 @@ export function EmailFilter({ filterBy, onSetFilter }) {
 
             <form>
                 <label htmlFor="txt">Filter</label>
-                <input className="txt" onChange={handleChange} id="txt" value={txt || ''} name="txt" type="text" />
+                <input className="txt" list="options" onChange={handleChange} id="txt" value={txt || ''} name="txt" type="text" />
             </form>
 
         </section>

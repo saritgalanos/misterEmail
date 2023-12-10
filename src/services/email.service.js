@@ -18,7 +18,7 @@ const email = {
     isStarred: false,
     sentAt: 1551133930594,
     removedAt: null, //for later use from: 'momo@momo.com', to: 'user@appsus.com'
-    from: 'momo@momo.com', 
+    from: 'momo@momo.com',
     to: 'saritgalanos@misteremail.com'
 }
 
@@ -35,64 +35,68 @@ _createEmails()
 async function query(filterBy) {
     let emails = await storageService.query(STORAGE_KEY)
     if (filterBy) {
-        console.log("query filer:"+filterBy)
-        var { txt,emailStatus, isRead } = filterBy
-        // maxBatteryStatus = maxBatteryStatus || Infinity
-        // minBatteryStatus = minBatteryStatus || 0
+        
+        var { txt, emailStatus, isRead } = filterBy
+        console.log(`query filer: txt:${txt} isRead:${isRead}`)
+
         emails = emails.filter(email => email.body.toLowerCase().includes(txt.toLowerCase())
-        || email.subject.toLowerCase().includes(txt.toLowerCase()))
-        //     && (robot.batteryStatus < maxBatteryStatus)
-        //     && robot.batteryStatus > minBatteryStatus)
-    }
-    return emails
-}
+            || email.subject.toLowerCase().includes(txt.toLowerCase()))
 
-function getById(id) {
-    return storageService.get(STORAGE_KEY, id)
-}
+        if (isRead != 'All' || !isRead) {
+            const isReadFilter = (isRead === 'Read') ? true : false
+            emails = emails.filter(email => (email.isRead === isReadFilter))
 
-function remove(id) {
-    return storageService.remove(STORAGE_KEY, id)
-}
-
-function save(emailToSave) {
-    if (emailToSave.id) {
-        return storageService.put(STORAGE_KEY, emailToSave)
-    } else {
-        //emailToSave.isOn = false
-        return storageService.post(STORAGE_KEY, emailToSave)
+        }
+        return emails
     }
 }
 
-function createEmail(subject = '', body = '', sentAt = 0, removedAt = null,from="", to="") {
-    return {
-        subject,
-        body,
-        isRead: false,
-        isStarred: false,
-        sentAt,
-        removedAt,
-        from,
-        to
+    function getById(id) {
+        return storageService.get(STORAGE_KEY, id)
     }
-}
 
-function getDefaultFilter() {
-    return {
-        emaiStatus: '',
-        txt: '',
-        isRead: ''
+    function remove(id) {
+        return storageService.remove(STORAGE_KEY, id)
     }
-}
+
+    function save(emailToSave) {
+        if (emailToSave.id) {
+            return storageService.put(STORAGE_KEY, emailToSave)
+        } else {
+            //emailToSave.isOn = false
+            return storageService.post(STORAGE_KEY, emailToSave)
+        }
+    }
+
+    function createEmail(subject = '', body = '', sentAt = 0, removedAt = null, from = "", to = "") {
+        return {
+            subject,
+            body,
+            isRead: false,
+            isStarred: false,
+            sentAt,
+            removedAt,
+            from,
+            to
+        }
+    }
+
+    function getDefaultFilter() {
+        return {
+            emaiStatus: '',
+            txt: '',
+            isRead: ''
+        }
+    }
 
 
 
-function _createEmails() {
-    let emails = utilService.loadFromStorage(STORAGE_KEY)
-    
-    if (!emails || !emails.length) {
+    function _createEmails() {
+        let emails = utilService.loadFromStorage(STORAGE_KEY)
 
-        const emailBodylong = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        if (!emails || !emails.length) {
+
+            const emailBodylong = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -103,53 +107,53 @@ function _createEmails() {
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`
 
-         emails = [
-            {
-                id: 'e101', subject: 'Plans for tomorrow', body: 'emailBodylong',
-                isRead: false, isStarred: false, sentAt: 1551133930594, removedAt: null,
-                from: 'roni@gmail.com', to: 'saritgalanos@misteremail.com'
-            },
-            
-            {
-                id: 'e102', subject: 'My next vacation', body: 'I would like to take a vacation for Christmas ',
-                isRead: false, isStarred: false, sentAt: 1551133940594, removedAt: null,
-                from: 'shiri@momo.com', to: 'saritgalanos@misteremail.com'
-            },
-            {
-                id: 'e103', subject: 'Your yearly bonus', body: 'It is time for your yearly bonus, please come to my office',
-                isRead: false, isStarred: false, sentAt: 1551133950594, removedAt: null,
-                from: 'dan@momo.com', to: 'saritgalanos@misteremail.com'
-            },
-            {
-                id: 'e104', subject: 'Plans for tomorrow', body: 'emailBodylong',
-                isRead: false, isStarred: false, sentAt: 1551133930594, removedAt: null,
-                from: 'roni@gmail.com', to: 'saritgalanos@misteremail.com'
-            },
-            {
-                id: 'e105', subject: 'Plans for tomorrow', body: 'emailBodylong',
-                isRead: false, isStarred: false, sentAt: 1551133930594, removedAt: null,
-                from: 'roni@gmail.com', to: 'saritgalanos@misteremail.com'
-            },
-            
-            {
-                id: 'e106', subject: 'My next vacation', body: 'I would like to take a vacation for Christmas ',
-                isRead: false, isStarred: false, sentAt: 1551133940594, removedAt: null,
-                from: 'shiri@momo.com', to: 'saritgalanos@misteremail.com'
-            },
-            {
-                id: 'e107', subject: 'Your yearly bonus', body: 'It is time for your yearly bonus, please come to my office',
-                isRead: false, isStarred: false, sentAt: 1551133950594, removedAt: null,
-                from: 'daniel@momo.com', to: 'saritgalanos@misteremail.com'
-            },
-            {
-                id: 'e108', subject: 'Plans for tomorrow', body: 'emailBodylong',
-                isRead: false, isStarred: false, sentAt: 1551133930594, removedAt: null,
-                from: 'roni@gmail.com', to: 'saritgalanos@misteremail.com'
-            }
+            emails = [
+                {
+                    id: 'e101', subject: 'Plans for tomorrow', body: 'emailBodylong',
+                    isRead: false, isStarred: false, sentAt: 1551133930594, removedAt: null,
+                    from: 'roni@gmail.com', to: 'saritgalanos@misteremail.com'
+                },
 
-        ]
-        console.log(emails)
-        utilService.saveToStorage(STORAGE_KEY, emails)
+                {
+                    id: 'e102', subject: 'My next vacation', body: 'I would like to take a vacation for Christmas ',
+                    isRead: false, isStarred: false, sentAt: 1551133940594, removedAt: null,
+                    from: 'shiri@momo.com', to: 'saritgalanos@misteremail.com'
+                },
+                {
+                    id: 'e103', subject: 'Your yearly bonus', body: 'It is time for your yearly bonus, please come to my office',
+                    isRead: false, isStarred: false, sentAt: 1551133950594, removedAt: null,
+                    from: 'dan@momo.com', to: 'saritgalanos@misteremail.com'
+                },
+                {
+                    id: 'e104', subject: 'Plans for tomorrow', body: 'emailBodylong',
+                    isRead: false, isStarred: false, sentAt: 1551133930594, removedAt: null,
+                    from: 'roni@gmail.com', to: 'saritgalanos@misteremail.com'
+                },
+                {
+                    id: 'e105', subject: 'Plans for tomorrow', body: 'emailBodylong',
+                    isRead: false, isStarred: false, sentAt: 1551133930594, removedAt: null,
+                    from: 'roni@gmail.com', to: 'saritgalanos@misteremail.com'
+                },
+
+                {
+                    id: 'e106', subject: 'My next vacation', body: 'I would like to take a vacation for Christmas ',
+                    isRead: false, isStarred: false, sentAt: 1551133940594, removedAt: null,
+                    from: 'shiri@momo.com', to: 'saritgalanos@misteremail.com'
+                },
+                {
+                    id: 'e107', subject: 'Your yearly bonus', body: 'It is time for your yearly bonus, please come to my office',
+                    isRead: false, isStarred: false, sentAt: 1551133950594, removedAt: null,
+                    from: 'daniel@momo.com', to: 'saritgalanos@misteremail.com'
+                },
+                {
+                    id: 'e108', subject: 'Plans for tomorrow', body: 'emailBodylong',
+                    isRead: false, isStarred: false, sentAt: 1551133930594, removedAt: null,
+                    from: 'roni@gmail.com', to: 'saritgalanos@misteremail.com'
+                }
+
+            ]
+            console.log(emails)
+            utilService.saveToStorage(STORAGE_KEY, emails)
+        }
     }
-}
 
