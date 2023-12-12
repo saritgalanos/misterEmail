@@ -1,7 +1,6 @@
 .email-details {
-    font-size: 1em;
     display:flex;
-      
+    font-size: 1em;
 }
 
 .email-details .email-subject {

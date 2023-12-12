@@ -14,7 +14,7 @@ export function App() {
         <Router>
             <section className='main-app'>
                 <AppHeader />
-                <main className='container'>
+                <main className='outer-container'>
                     <Routes>
                         <Route path="/" element={<HomePage />} />
                         <Route path="/about" element={<AboutUs />} />
