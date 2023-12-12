@@ -5,6 +5,7 @@ import { AboutUs } from './pages/AboutUs'
 import { AppHeader } from './cmps/AppHeader'
 import { EmailIndex } from './pages/EmailIndex'
 import { EmailDetails } from './pages/EmailDetails'
+import { EmailFolderList } from './cmps/EmailFolderList';
 
 
 export function App() {
@@ -15,15 +16,20 @@ export function App() {
             <section className='main-app'>
                 <AppHeader />
                 <main className='outer-container'>
-                    <Routes>
-                        <Route path="/" element={<HomePage />} />
-                        <Route path="/about" element={<AboutUs />} />
-                        <Route path="/emails" element={<EmailIndex />} />
-                        <Route path="/email/:emailId" element={<EmailDetails />} />
-                    </Routes>
+                    <EmailFolderList />
+                    <div className='routers-container'>
+                        <Routes>
+                            <Route path="/" element={<HomePage />} />
+                            <Route path="/about" element={<AboutUs />} />
+                            <Route path="/emails" element={<EmailIndex />} />
+                            <Route path="/email/:emailId" element={<EmailDetails />} />
+
+                        </Routes>
+
+                    </div>
                 </main>
             </section>
-         </Router>
+        </Router>
 
 
 

@@ -38,8 +38,8 @@ export function EmailIndex() {
     }
 
     function onSetFilter(filterBy) {
-         setFilterBy(prevFilter => ({ ...prevFilter, ...filterBy }))
-     }
+        setFilterBy(prevFilter => ({ ...prevFilter, ...filterBy }))
+    }
 
     async function onStar(emailId) {
         try {
@@ -56,11 +56,10 @@ export function EmailIndex() {
 
     return (
         <section className="email-index">
-            <div className="side-content">
-                <EmailFolderList />
+            <div className='main-filter'>
+                <EmailFilter filterBy={{ txt, emailStatus, isRead }} onSetFilter={onSetFilter} />
             </div>
             <div className='main-content'>
-                <EmailFilter filterBy={{ txt, emailStatus, isRead }} onSetFilter={onSetFilter} />
                 <EmailList emails={emails} onRemoveEmail={onRemoveEmail} onStar={onStar} />
             </div>
         </section>

@@ -51,9 +51,9 @@ export function EmailDetails() {
 
     return (
         <div className="email-details">
-            <div className="side-content">
+            {/* <div className="side-content">
                 <EmailFolderList />
-            </div>
+            </div> */}
             <div className="main-content">
                 <div className="email-date">{utilService.getDateToDisplay(new Date(email.sentAt), true)}</div>
                 <div className='image-with-text'>
