@@ -8,7 +8,7 @@
 }
 
 .routers-container {
-    flex-grow:3
+    flex:1
 }
 /* GRIDS */
 .simple-cards-grid {

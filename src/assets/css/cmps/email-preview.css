@@ -1,7 +1,7 @@
 .email-preview {
     display: flex;
-    flex:1;
-    flex-grow: 1;
+    /* flex:1; */
+    /* flex-grow: 1; */
     font-size: 1em;
     background: #faf8f9;
     color: rgb(68, 67, 67);
@@ -14,19 +14,20 @@
 
 .email-line {
     display: flex;
-     flex-grow: 1;
+    flex:1;
+    flex-grow: 1;
     align-items: flex-start;
     /* Align items to the start */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    flex-shrink: 1;
 }
 
 .email-preview .subject,
 .email-preview .from,
 .email-preview .sent-at {
     margin-right: 10px;
-    /* font-weight: bold; */
 }
 
 .email-not-read {
@@ -42,12 +43,11 @@
 }
 
 .email-preview .email-body {
-    flex-shrink: 0;
-    flex-grow: 2;
-    min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    flex:1;
+    flex-shrink: 1;
     margin-right: 20px;
+    max-width: 400px;
+    padding-right: 20px;
 }
 
 .email-preview .sent-at {

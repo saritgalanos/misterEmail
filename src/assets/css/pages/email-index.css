@@ -7,6 +7,6 @@
 }
 
 .main-content {
-    flex-grow: 0;
+    /* flex:1; */
     padding: 20px;
 }
